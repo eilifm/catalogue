@@ -10,7 +10,8 @@ import json
 import platform
 from joblib import Parallel, delayed
 from itertools import islice
-
+import logging
+logger = logging.getLogger('pycat')
 
 def split_every(n, iterable):
     i = iter(iterable)
@@ -67,7 +68,7 @@ def file_times(path_to_file):
 
 def process(files):
     for file in files:
-        print(file)
+        logger.debug(file)
         filename, path = file[0], file[1]
         # print(file)
         try:

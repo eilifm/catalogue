@@ -11,6 +11,7 @@ ENV LC_ALL en_US.UTF-8
 ENV LC_CTYPE en_US.UTF-8
 ENV LC_MESSAGES en_US.UTF-8
 ENV IS_DOCKER True
+ENV AM_I_IN_A_DOCKER_CONTAINER Yes
 
 RUN set -ex \
     && buildDeps=' \
@@ -60,7 +61,7 @@ COPY . ${WORKING_DIR}/catalogue
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 RUN chown -R catuser: ${WORKING_DIR}
-RUN pip install -e ${WORKING_DIR}/catalogue
+RUN pip install ${WORKING_DIR}/catalogue
 
 USER catuser
 WORKDIR ${WORKING_DIR}
